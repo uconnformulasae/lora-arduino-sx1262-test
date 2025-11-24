@@ -1,10 +1,9 @@
 #include <Arduino.h>
+#include <RadioLib.h>
+#include <config.h>
+#include <serial_utils.h>
 
-/* Function Prototypes */
-
-String serialInputListener();
-
-/* Setup Routine */
+SX1262 radio = new Module(SPI_NSS, DIO1, NRST, BUSY);
 
 void setup() {
   Serial.begin(9600);
@@ -13,9 +12,13 @@ void setup() {
     delay(1000);
   }
   Serial.println("Serial Monitor Start");
-}
 
-/* Main Routine */
+  initializeSX1262()
+  
+  /**TODO: 
+   * Ask user what communication mode should be used (basic UDP-like, constant ping, TCP-like back and forth) and any applicable settings
+   */
+}
 
 void loop() {
   String commandInput = serialInputListener();
@@ -26,33 +29,24 @@ void loop() {
   
 }
 
-/* Function Definitions */
+void initializeSX1262() {
+  Serial.println("Initializing SX1262...");
+  delay(500);
+  Serial.println("========== [Default Options] ==========");
+  serialPrintOptions(d_frequency, d_bandwidth, d_spreading_factor, d_coding_rate, d_sync_word, d_output_power, d_preamble_length);
+  Serial.println("Use Defaults? (Y/n)");
 
-String serialInputListener() {
-  /**
-   * Checks if serial buffer has new data. If new data is present, function handles automatic echo to serial terminal and waits until \n is sent to return string. If no data in buffer, returns -1
-   * 
-   * No Parameters
-   * 
-   * Returns type String
-   */
-
-  char incoming_char = -1;
-  String read_buffer;
+  uint8_t userSelect = serialInputCollectYN();
   
-  if (Serial.available() > 0) {           // Check if new data in buffer
-      while (incoming_char != '\n') {
-        incoming_char = Serial.read();    // Read oldest byte and remove from buffer
+  if (userSelect == 1) {
+    Serial.println("Using Defaults");
 
-        if (incoming_char != -1) {        // Serial.read() returns -1 if no new byte
-          read_buffer += incoming_char;   // Add new character to string
-          Serial.write(incoming_char);    // Echo back character to terminal
-        }
-      }
-      read_buffer.trim();                 // Trim starting and ending whitespace including \n
+    int radio_state = radio.begin(d_frequency, d_bandwidth, d_spreading_factor, d_coding_rate, d_sync_word, d_output_power, d_preamble_length);
   } else {
-    read_buffer = incoming_char;          // Set output string to -1 if no data in buffer
+    Serial.println("Not Using Defaults");
+
+    // TODO: Add custom settings and initialize
   }
 
-  return read_buffer;
+  Serial.println("Initialization Complete.");
 }
