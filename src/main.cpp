@@ -5,6 +5,8 @@
 
 SX1262 radio = new Module(SPI_NSS, DIO1, NRST, BUSY);
 
+void initializeSX1262();
+
 void setup() {
   Serial.begin(9600);
 
@@ -13,8 +15,8 @@ void setup() {
   }
   Serial.println("Serial Monitor Start");
 
-  initializeSX1262()
-  
+  initializeSX1262();
+
   /**TODO: 
    * Ask user what communication mode should be used (basic UDP-like, constant ping, TCP-like back and forth) and any applicable settings
    */
