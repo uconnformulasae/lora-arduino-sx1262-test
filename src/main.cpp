@@ -1,6 +1,10 @@
 #include <Arduino.h>
 
+/* Function Prototypes */
+
 String serialInputListener();
+
+/* Setup Routine */
 
 void setup() {
   Serial.begin(9600);
@@ -11,6 +15,8 @@ void setup() {
   Serial.println("Serial Monitor Start");
 }
 
+/* Main Routine */
+
 void loop() {
   String commandInput = serialInputListener();
 
@@ -19,6 +25,8 @@ void loop() {
   }
   
 }
+
+/* Function Definitions */
 
 String serialInputListener() {
   /**
