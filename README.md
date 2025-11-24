@@ -8,7 +8,7 @@ The goal of this is to quickly produce a proof-of-concept of LoRa using the SX12
 
 The development board consists of header pins, SX-1262 module, SPI series resistors, and a single button. The button does not relate to the module in any way and just connects to ground the DO pin which is usually pulled high to 3v3 through a 10k resistor. The NU pins below are not used and act as a simple passthrough for the XIAO system which the board was originally designed for. The RF_SW pin, which must be driven by the controller, determines whether the Rx or Tx circuitry is active. When recieving, line must be set high, otherwise (during Tx), must be set low.  
 
-![](attachments\xiao-sx1262-board-pinout.png)
+![](attachments/xiao-sx1262-board-pinout.png)
 
 ### Links
 * [Seeed Studio Store: WIO-SX1262 for XIAO](https://www.seeedstudio.com/Wio-SX1262-for-XIAO-p-6379.html)
