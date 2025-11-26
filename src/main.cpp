@@ -1,3 +1,11 @@
+/**
+ *  NAME: main.cpp
+ *  Description: Main c++ code file
+ * 
+ *  Author: Charlie K.
+ *  Date: 11/26/25
+ */
+
 #include <Arduino.h>
 #include <RadioLib.h>
 #include <config.h>

@@ -1,3 +1,11 @@
+/**
+ *  NAME: config.h
+ *  Description: Contains configuration definitions
+ * 
+ *  Author: Charlie K.
+ *  Date: 11/26/25
+ */
+
 #define d_frequency 915.0
 #define d_bandwidth 500.0
 #define d_spreading_factor 6

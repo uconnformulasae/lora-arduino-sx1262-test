@@ -1,6 +1,9 @@
 /**
  *  NAME: serial_utils.cpp
  *  Description: Holds basic helper/utility functions to handle common serial monitor tasks
+ * 
+ *  Author: Charlie K.
+ *  Date: 11/26/25
  */
 
 #include <Arduino.h>

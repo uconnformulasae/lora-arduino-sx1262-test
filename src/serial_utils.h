@@ -1,3 +1,11 @@
+/**
+ *  NAME: serial_utils.h
+ *  Description: Holds basic helper/utility functions to handle common serial monitor tasks
+ * 
+ *  Author: Charlie K.
+ *  Date: 11/26/25
+ */
+
 #ifndef SERIAL_UTILS_H
 #define SERIAL_UTILS_H
 
