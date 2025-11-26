@@ -1,6 +1,9 @@
 # LoRa SX1262 Tranciever Arduino Proof-of-Concept
 
-The goal of this is to quickly produce a proof-of-concept of LoRa using the SX1262 and do some initial viability testing ensuring that this solution is feasible for wireless telemetry.
+
+The goal of this is to quickly produce a proof-of-concept of LoRa using the SX1262 and do some initial viability testing ensuring that this solution is feasible for our wireless telemetry project.
+
+***IMPORTANT NOTE:** This project is only compatible with the Arduino Mega, originally it was going to be compatible with the uno and other boards, but it turns out the RadioLib is quite large and memory heavy, so keep this in mind as I only realized this hours into the project. Oops* 
 
 *Development/Dev Board refers to the XIAO WIO-SX1262 board from Seeed Studio. Module refers to the solderable WIO-SX1262 from Seeed Studio. Chip/IC refers to the tranciever SX1262 chip from Semtech.*
 
@@ -37,18 +40,18 @@ Two separate, identical setups, consisting each of an Arduino, a WIO-SX1262 dev 
 
 Connect the module headers to the appropriate pins listed below. Also, connect the antenna to the IPEX connector on the module. Afterwards, connect the Arduino to a computer and follow the software setup. 
 
-| ***WIO-SX1262 Dev Board Pin (Module Pin)*** | ***Arduino UNO Pin*** | ***Arduino Leonardo Pin*** | ***Arduino Mega 2560 Pin*** | **Function** |
-| :------------- | :-------------- | :----------------------- | :-------------------- | :-------------------- |
-| **3v3** (8) | 3v3 | 3v3 | 3v3 | Power Supply (3.3V) |
-| **GND** (7) | GND | GND | GND | Ground |
-| **BUSY** (11) | D6 | D6 | D6 | Busy Signal of SX1262 |
-| **DIO1** (12) | D7 | D7 | D7 | Multipurpose DIO of SX1262 |
-| **NRST** (5) | D8 | D8 | D8 | SX1262 Reset (active low) |
-| **RF\_SW** (1) | D9 | D9 | D9 | RF Switch Control (high is rx, low is tx) |
-| **SPI\_NSS/CS** (6) | D10 | D10 | D53 | Chip Select (SS) |
-| **SPI\_MOSI/COPI** (3) | D11 | ICSP Pin 4 | D51 | Master Out / Slave In |
-| **SPI\_MISO/CIPO** (2) | D12 | ICSP Pin 1 | D50 | Master In / Slave Out |
-| **SPI\_SCK** (4) | D13 | ICSP Pin 3 | D52 | Serial Clock |
+| ***WIO-SX1262 Dev Board Pin (Module Pin)*** | ***Arduino Mega 2560 Pin*** | **Function** |
+| :------------- | :--------------- | :------------------------- |
+| **3v3** (8) | 3v3 | Power Supply (3.3V) |
+| **GND** (7) | GND | Ground |
+| **BUSY** (11) | D6 | Busy Signal of SX1262 |
+| **DIO1** (12) | D7 | Multipurpose DIO of SX1262 |
+| **NRST** (5) | D8 | SX1262 Reset (active low) |
+| **RF\_SW** (1) | D9 | RF Switch (high is rx, low is tx) |
+| **SPI\_NSS/CS** (6) | D53 | Chip Select (SS) |
+| **SPI\_MOSI/COPI** (3) | D51 | Master Out / Slave In |
+| **SPI\_MISO/CIPO** (2) | D50 | Master In / Slave Out |
+| **SPI\_SCK** (4) | D52 | Serial Clock |
 
 ### Software
 

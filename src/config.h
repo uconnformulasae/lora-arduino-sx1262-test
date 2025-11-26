@@ -6,9 +6,8 @@
 #define d_output_power 2
 #define d_preamble_length 20
 
-// TODO: Add support for multiple boards
-
-#define SPI_NSS 10
+// Arduino Mega Pins
+#define SPI_NSS 53
 #define DIO1 7
 #define NRST 8
 #define BUSY 6
