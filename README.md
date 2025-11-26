@@ -1,6 +1,5 @@
 # LoRa SX1262 Tranciever Arduino Proof-of-Concept
 
-
 The goal of this is to quickly produce a proof-of-concept of LoRa using the SX1262 and do some initial viability testing ensuring that this solution is feasible for our wireless telemetry project.
 
 ***IMPORTANT NOTE:** This project is only compatible with the Arduino Mega, originally it was going to be compatible with the uno and other boards, but it turns out the RadioLib is quite large and memory heavy, so keep this in mind as I only realized this hours into the project. Oops* 
