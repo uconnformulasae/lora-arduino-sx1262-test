@@ -40,7 +40,7 @@ uint8_t serialInputCollectOption(int numOptions, ...) {
   va_list options;
   va_start(options, numOptions);
 
-  char** optionList; // List to hold options bc va_list can only iterate once
+  char* optionList[numOptions]; // List to hold options bc va_list can only iterate once
 
   for (int i = 0; i < numOptions; i++) {
     optionList[i] = va_arg(options, char*);
