@@ -13,7 +13,7 @@
 
 SX1262 radio = new Module(SPI_NSS, DIO1, NRST, BUSY);
 
-void initializeSX1262();
+void userInitializeSX1262();
 
 void setup() {
   Serial.begin(9600);
@@ -23,15 +23,41 @@ void setup() {
   }
   Serial.println("Serial Monitor Start");
 
-  serialModeMenu();
-  initializeSX1262();
+  uint8_t mode = serialModeMenu();
 
-  /**TODO: 
-   * Ask user what communication mode should be used (basic UDP-like, constant ping, TCP-like back and forth) and any applicable settings
-   */
+  uint8_t RxTxMode;
+
+  if (mode == 0 || mode == 1) { // Benchmark and Ping Mode
+    RxTxMode = serialRxTxSelector();
+
+  } if (mode == 1 || mode == 2) { // Ping and Manual Mode
+    userInitializeSX1262();
+  }
+
+  if (mode == 0 && RxTxMode == 1) { // Benchmark and Tx side
+    // initialize
+    // Run script
+  }
+
+  if (mode == 0 && RxTxMode == 0) { // Benchmark and Rx side
+    // Listen for script and print
+  }
+
+  if (mode == 1 && RxTxMode == 1) { // Ping and Tx side
+    // Ask for ping time
+    // Run pings
+    // Recive responses
+  }
+
+  if (mode == 1 && RxTxMode == 0) { // Ping and Rx side
+    // Listen for pings and respond
+  }
+
+  // Manual mode will just end up at loop below
+
 }
 
-void loop() {
+void loop() { // Manual mode
   String commandInput = serialInputListener();
 
   if (commandInput[0] != -1) {
@@ -40,7 +66,7 @@ void loop() {
   
 }
 
-void initializeSX1262() {
+void userInitializeSX1262() {
   Serial.println("Initializing SX1262...");
   delay(500);
   Serial.println("========== [Default Options] ==========");
