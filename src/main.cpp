@@ -80,10 +80,14 @@ void userInitializeSX1262() {
 
     int radio_state = radio.begin(d_frequency, d_bandwidth, d_spreading_factor, d_coding_rate, d_sync_word, d_output_power, d_preamble_length);
   } else {
-    Serial.println("Not Using Defaults");
+    Serial.println("Okay, Not Using Defaults");
 
-    Serial.println("Set Following Settings");
+    Serial.println("========== [Custom Options] ==========");
     Serial.println("Frequency (150 MHz through 960 MHz, IMPORTANT: Ensure to set to regional legal frequency, transmission on illegal/incorrect frequencies can be a crime!!)?");
+    float freq = serialInputCollectFreq();
+
+    Serial.println("Bandwidth (7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125.0, 250.0, or 500.0 kHz)?");
+    float band = serialInputCollectBand();
   }
 
   Serial.println("Initialization Complete.");
