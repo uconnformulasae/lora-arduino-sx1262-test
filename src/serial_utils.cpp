@@ -9,7 +9,7 @@
 #include <Arduino.h>
 #include <serial_utils.h>
 
-uint8_t serialInputCollect(int numOptions, ...) {
+uint8_t serialInputCollectOption(int numOptions, ...) {
   /**
    * Retrieves a user response for list of options. Returns a uint8_t of option starting with 0. No default option, must provide input matching option (caller can specify a blank "" option to handle if desired but will output as separate option). This function is blocking.
    * 
@@ -53,7 +53,7 @@ uint8_t serialInputCollect(int numOptions, ...) {
   return userInput;
 }
 
-uint8_t serialInputCollectYN() {
+uint8_t serialInputCollectOptionYN() {
   /**
    * Retrieves a user response for yes or no. Returns a uint8_t of 1 or 0 for yes or no. This function is blocking.
    * 
@@ -143,11 +143,11 @@ uint8_t serialModeMenu() {
   Serial.println("- Manual (M) = Used to send messages manually using specified settings.");
   Serial.println("*Note* Benchmark and Ping mode both have specific Tx and Rx sides, Manual acts in a tranciever type fasion where each side recieves unless user sends transmit command.");
   Serial.print("Select Option (b/p/m): ");
-  return serialInputCollect(3, "b", "p", "m"); 
+  return serialInputCollectOption(3, "b", "p", "m"); 
 }
 
 uint8_t serialRxTxSelector() {
   Serial.println("Will this device be sending data out (T) or recieving data (R)? For ping mode: (T) sends the pings, (R) responds.");
   Serial.print("Select Option (r/t): ");
-  return serialInputCollect(2, "r", "t"); 
+  return serialInputCollectOption(2, "r", "t"); 
 }
