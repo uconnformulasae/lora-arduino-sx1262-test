@@ -9,6 +9,50 @@
 #include <Arduino.h>
 #include <serial_utils.h>
 
+uint8_t serialInputCollect(int numOptions, ...) {
+  /**
+   * Retrieves a user response for list of options. Returns a uint8_t of option starting with 0. No default option, must provide input matching option (caller can specify a blank "" option to handle if desired but will output as separate option). This function is blocking.
+   * 
+   * Parameters: char* 's
+   * 
+   * Returns: uint8_t of option in arguments (staring at 0)
+   */
+  va_list options;
+  va_start(options, numOptions);
+
+  char** optionList; // List to hold options bc va_list can only iterate once
+
+  for (int i = 0; i < numOptions; i++) {
+    optionList[i] = va_arg(options, char*);
+  }
+
+  va_end(options); // Close list for memory savings
+
+  String commandInput;
+  int8_t userInput = -1;
+  
+  while (userInput == -1) { // Blocking component of function, runs until valid input
+    do {
+      commandInput = serialInputListener();
+    } while (commandInput[0] == -1); // Wait for input from non-blocking function
+
+    commandInput.toLowerCase(); // Normalize text for easier comparison
+
+    for (int i = 0; i < numOptions; i++) {
+      if (commandInput == optionList[i]) {  // Check for input in options and return option index number of matching option
+        userInput = i;
+        break;  // No need to check the rest of the options
+      }
+    }
+
+    if (userInput == -1) {  // Non-matching input error message
+      Serial.println("Invalid Input. Try again.");
+    }
+  }
+  
+  return userInput;
+}
+
 uint8_t serialInputCollectYN() {
   /**
    * Retrieves a user response for yes or no. Returns a uint8_t of 1 or 0 for yes or no. This function is blocking.
