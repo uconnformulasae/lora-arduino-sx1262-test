@@ -3,7 +3,7 @@
  *  Description: Holds basic helper/utility functions to handle common serial monitor tasks
  * 
  *  Author: Charlie K.
- *  Date: 11/26/25
+ *  Date: 11/29/25
  */
 
 #include <Arduino.h>
@@ -121,7 +121,14 @@ String serialInputListener() {
       while (incoming_char != '\n') {
         incoming_char = Serial.read();    // Read oldest byte and remove from buffer
 
-        if (incoming_char != -1) {        // Serial.read() returns -1 if no new byte
+        if (incoming_char == 8) {         // Backspace handling
+          if (read_buffer.length() != 0) {
+            read_buffer.remove(read_buffer.length() - 1);
+            Serial.write('\b');
+            Serial.write(' ');
+            Serial.write('\b');
+          }
+        } else if (incoming_char != -1) { // Serial.read() returns -1 if no new byte
           read_buffer += incoming_char;   // Add new character to string
           Serial.write(incoming_char);    // Echo back character to terminal
         }
