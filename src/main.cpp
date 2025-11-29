@@ -23,6 +23,7 @@ void setup() {
   }
   Serial.println("Serial Monitor Start");
 
+  serialModeMenu();
   initializeSX1262();
 
   /**TODO: 

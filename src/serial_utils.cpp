@@ -132,3 +132,16 @@ void serialPrintOptions(float frequency,
   Serial.println("Output Power: " + String(output_power) + " dBm");
   Serial.println("Preamble Length: " + String(preamble_length) + " symbols");
 }
+
+uint8_t serialModeMenu() {
+  /**
+   * Writes to serial asking for user to select between benchmark, ping, manual mode
+   */
+  Serial.println("Which operating mode should be used?");
+  Serial.println("- Benchmark Mode (B) = Used to run through preloaded set of options to determine best options for current conditions,");
+  Serial.println("- Ping (P) = Used to test for continuos connection with specified settings by sending periodic ping messages to determine reliability,");
+  Serial.println("- Manual (M) = Used to send messages manually using specified settings.");
+  Serial.println("*Note* Benchmark and Ping mode both have specific Tx and Rx sides, Manual acts in a tranciever type fasion where each side recieves unless user sends transmit command.");
+  Serial.print("Select Option (b/p/M): ");
+  return serialInputCollect(3, "b", "p", "m"); 
+}
