@@ -11,9 +11,11 @@
 
 #include <Arduino.h>
 
-uint8_t serialInputCollect(int numOptions, ...);
+float serialInputCollectFloat();
 
-uint8_t serialInputCollectYN();
+uint8_t serialInputCollectOption(int numOptions, ...);
+
+uint8_t serialInputCollectOptionYN();
 
 String serialInputListener();
 

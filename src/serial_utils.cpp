@@ -9,6 +9,26 @@
 #include <Arduino.h>
 #include <serial_utils.h>
 
+float serialInputCollectFloat() {
+  String commandInput;
+  float userInput = -1.0;
+
+  while (true) { // Blocking component of function, runs until valid input
+    do {
+      commandInput = serialInputListener();
+    } while (commandInput[0] == -1); // Wait for input from non-blocking function
+
+    userInput = commandInput.toFloat();
+
+    if (userInput < 150.0 || userInput > 960.0) {  // Non-matching input error message
+      Serial.println("Invalid Input. Try again.");
+    } else {
+      return userInput;
+    }
+
+  }
+}
+
 uint8_t serialInputCollectOption(int numOptions, ...) {
   /**
    * Retrieves a user response for list of options. Returns a uint8_t of option starting with 0. No default option, must provide input matching option (caller can specify a blank "" option to handle if desired but will output as separate option). This function is blocking.
