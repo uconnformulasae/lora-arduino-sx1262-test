@@ -11,7 +11,9 @@
 
 #include <Arduino.h>
 
-float serialInputCollectFloat();
+float serialInputCollectFreq();
+
+float serialInputCollectBand();
 
 uint8_t serialInputCollectOption(int numOptions, ...);
 

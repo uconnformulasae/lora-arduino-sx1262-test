@@ -9,7 +9,7 @@
 #include <Arduino.h>
 #include <serial_utils.h>
 
-float serialInputCollectFloat() {
+float serialInputCollectFreq() {
   String commandInput;
   float userInput = -1.0;
 
@@ -24,6 +24,35 @@ float serialInputCollectFloat() {
       Serial.println("Invalid Input. Try again.");
     } else {
       return userInput;
+    }
+
+  }
+}
+
+float serialInputCollectBand() {
+  String commandInput;
+  float userInput = -1.0;
+
+  while (true) { // Blocking component of function, runs until valid input
+    do {
+      commandInput = serialInputListener();
+    } while (commandInput[0] == -1); // Wait for input from non-blocking function
+
+    userInput = commandInput.toFloat();
+
+    if (userInput == 7.8f    ||
+        userInput == 10.4f   ||
+        userInput == 15.6f   ||
+        userInput == 20.8f   ||
+        userInput == 31.25f  ||
+        userInput == 41.7f   ||
+        userInput == 62.5f   ||
+        userInput == 125.0f  ||
+        userInput == 250.0f  ||
+        userInput == 500.0f) {
+      return userInput;
+    } else {
+      Serial.println("Invalid Input. Try again.");
     }
 
   }
