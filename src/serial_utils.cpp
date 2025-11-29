@@ -145,3 +145,9 @@ uint8_t serialModeMenu() {
   Serial.print("Select Option (b/p/m): ");
   return serialInputCollect(3, "b", "p", "m"); 
 }
+
+uint8_t serialRxTxSelector() {
+  Serial.println("Will this device be sending data out (T) or recieving data (R)? For ping mode: (T) sends the pings, (R) responds.");
+  Serial.print("Select Option (r/t): ");
+  return serialInputCollect(2, "r", "t"); 
+}

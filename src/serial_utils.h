@@ -21,4 +21,6 @@ void serialPrintOptions(float frequency, float bandwidth, uint8_t spreading_fact
 
 uint8_t serialModeMenu();
 
+uint8_t serialRxTxSelector();
+
 #endif
