@@ -73,7 +73,7 @@ void userInitializeSX1262() {
   serialPrintOptions(d_frequency, d_bandwidth, d_spreading_factor, d_coding_rate, d_sync_word, d_output_power, d_preamble_length);
   Serial.println("Use Defaults? (Y/n)");
 
-  uint8_t userSelect = serialInputCollectYN();
+  uint8_t userSelect = serialInputCollectOptionYN();
   
   if (userSelect == 1) {
     Serial.println("Using Defaults");
