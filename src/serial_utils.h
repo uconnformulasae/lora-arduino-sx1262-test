@@ -3,7 +3,7 @@
  *  Description: Holds basic helper/utility functions to handle common serial monitor tasks
  * 
  *  Author: Charlie K.
- *  Date: 11/26/25
+ *  Date: 11/29/25
  */
 
 #ifndef SERIAL_UTILS_H
