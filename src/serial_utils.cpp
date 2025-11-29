@@ -142,6 +142,6 @@ uint8_t serialModeMenu() {
   Serial.println("- Ping (P) = Used to test for continuos connection with specified settings by sending periodic ping messages to determine reliability,");
   Serial.println("- Manual (M) = Used to send messages manually using specified settings.");
   Serial.println("*Note* Benchmark and Ping mode both have specific Tx and Rx sides, Manual acts in a tranciever type fasion where each side recieves unless user sends transmit command.");
-  Serial.print("Select Option (b/p/M): ");
+  Serial.print("Select Option (b/p/m): ");
   return serialInputCollect(3, "b", "p", "m"); 
 }
