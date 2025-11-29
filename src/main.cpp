@@ -27,33 +27,33 @@ void setup() {
 
   uint8_t RxTxMode;
 
-  if (mode == 0 || mode == 1) { // Benchmark and Ping Mode
+  if (mode == 0 || mode == 1) { // Benchmark and Ping Mode, Ask for Rx/Tx
     RxTxMode = serialRxTxSelector();
 
-  } if (mode == 1 || mode == 2) { // Ping and Manual Mode
+  } if (mode == 1 || mode == 2) { // Ping and Manual Mode, initalize using user or default settings
     userInitializeSX1262();
   }
 
-  if (mode == 0 && RxTxMode == 1) { // Benchmark and Tx side
+  if (mode == 0 && RxTxMode == 1) { // Benchmark Tx side
     // initialize
     // Run script
   }
 
-  if (mode == 0 && RxTxMode == 0) { // Benchmark and Rx side
+  if (mode == 0 && RxTxMode == 0) { // Benchmark Rx side
     // Listen for script and print
   }
 
-  if (mode == 1 && RxTxMode == 1) { // Ping and Tx side
+  if (mode == 1 && RxTxMode == 1) { // Ping Tx side
     // Ask for ping time
     // Run pings
     // Recive responses
   }
 
-  if (mode == 1 && RxTxMode == 0) { // Ping and Rx side
+  if (mode == 1 && RxTxMode == 0) { // Ping Rx side
     // Listen for pings and respond
   }
 
-  // Manual mode will just end up at loop below
+  // Manual mode will just end up at main loop below
 
 }
 
@@ -82,7 +82,8 @@ void userInitializeSX1262() {
   } else {
     Serial.println("Not Using Defaults");
 
-    // TODO: Add custom settings and initialize
+    Serial.println("Set Following Settings");
+    Serial.println("Frequency (150 MHz through 960 MHz, IMPORTANT: Ensure to set to regional legal frequency, transmission on illegal/incorrect frequencies can be a crime!!)?");
   }
 
   Serial.println("Initialization Complete.");
