@@ -53,7 +53,7 @@ void setup() {
     // Listen for pings and respond
   }
 
-  // Manual mode will just end up at main loop below
+  // Manual mode will just end up at main loop below, rx and tx modes are the same
 
 }
 
@@ -74,11 +74,13 @@ void userInitializeSX1262() {
   Serial.println("Use Defaults? (Y/n)");
 
   uint8_t userSelect = serialInputCollectOptionYN();
+
+  int radio_state;
   
   if (userSelect == 1) {
     Serial.println("Using Defaults");
 
-    int radio_state = radio.begin(d_frequency, d_bandwidth, d_spreading_factor, d_coding_rate, d_sync_word, d_output_power, d_preamble_length);
+    radio_state = radio.begin(d_frequency, d_bandwidth, d_spreading_factor, d_coding_rate, d_sync_word, d_output_power, d_preamble_length);
   } else {
     Serial.println("Okay, Not Using Defaults");
 
@@ -112,13 +114,23 @@ void userInitializeSX1262() {
 
     if (serialInputCollectOptionYN() != 1) {
       while (true) {
-        Serial.println("Reset Device!");
+        Serial.println("Reset device to change options!");
         delay(60000);
       }
     }
 
-    int radio_state = radio.begin(freq, band, sf, cr, sw, op, pl);
+    radio_state = radio.begin(freq, band, sf, cr, sw, op, pl);
   }
 
-  Serial.println("Initialization Complete.");
+  if (radio_state == RADIOLIB_ERR_NONE) {
+    Serial.println("Initialization Complete.");
+    return;
+  } else {
+    Serial.print("Initialization Failed. Code: ");
+    Serial.println(radio_state);
+    while (true) {
+        Serial.println("Reset device!");
+        delay(60000);
+      }
+  }
 }
