@@ -91,6 +91,9 @@ void userInitializeSX1262() {
 
     Serial.println("Spreading Factor (7 through 12)?");
     int8_t sf = serialInputCollectSF();
+
+    Serial.println("Coding Rate (1 through 4)?");
+    int8_t cr = serialInputCollectCR();
   }
 
   Serial.println("Initialization Complete.");
