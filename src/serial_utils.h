@@ -21,6 +21,10 @@ int8_t serialInputCollectCR();
 
 int16_t serialInputCollectSW();
 
+int8_t serialInputCollectOP();
+
+int32_t serialInputCollectPL();
+
 uint8_t serialInputCollectOption(int numOptions, ...);
 
 uint8_t serialInputCollectOptionYN();

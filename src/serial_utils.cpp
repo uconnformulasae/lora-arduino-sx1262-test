@@ -8,6 +8,7 @@
 
 #include <Arduino.h>
 #include <serial_utils.h>
+#include <utils.h>
 
 float serialInputCollectFreq() {
   String commandInput;
@@ -40,16 +41,16 @@ float serialInputCollectBand() {
 
     userInput = commandInput.toFloat();
 
-    if (userInput == 7.8f    ||
-        userInput == 10.4f   ||
-        userInput == 15.6f   ||
-        userInput == 20.8f   ||
-        userInput == 31.25f  ||
-        userInput == 41.7f   ||
-        userInput == 62.5f   ||
-        userInput == 125.0f  ||
-        userInput == 250.0f  ||
-        userInput == 500.0f) {
+    if (isClose(userInput, 7.8f) == 1 ||
+        isClose(userInput, 10.4f) == 1 ||
+        isClose(userInput, 15.6f) == 1 ||
+        isClose(userInput, 20.8f) == 1 ||
+        isClose(userInput, 31.25f) == 1 ||
+        isClose(userInput, 41.7f) == 1 ||
+        isClose(userInput, 62.5f) == 1 ||
+        isClose(userInput, 125.0f) == 1 ||
+        isClose(userInput, 250.0f) == 1 ||
+        isClose(userInput, 500.0f) == 1) {
       return userInput;
     } else {
       Serial.println("Invalid Input. Try again.");
@@ -69,7 +70,7 @@ int8_t serialInputCollectSF() {
 
     userInput = commandInput.toFloat();
 
-    if (userInput >= 7 && userInput <= 12) {
+    if (userInput >= 5 && userInput <= 12) {
       return userInput;
     } else {
       Serial.println("Invalid Input. Try again.");
@@ -112,6 +113,46 @@ int16_t serialInputCollectSW() {
     userInput = (int)strtol(commandInputChar, NULL, 16);
 
     return userInput;
+  }
+}
+
+int8_t serialInputCollectOP() {
+  String commandInput;
+  int8_t userInput = -1;
+
+  while (true) { // Blocking component of function, runs until valid input
+    do {
+      commandInput = serialInputListener();
+    } while (commandInput[0] == -1); // Wait for input from non-blocking function
+
+    userInput = commandInput.toInt();
+
+    if (userInput >= 0 && userInput <= 22) {
+      return userInput;
+    } else {
+      Serial.println("Invalid Input. Try again.");
+    }
+
+  }
+}
+
+int32_t serialInputCollectPL() {
+  String commandInput;
+  int32_t userInput = -1;
+
+  while (true) { // Blocking component of function, runs until valid input
+    do {
+      commandInput = serialInputListener();
+    } while (commandInput[0] == -1); // Wait for input from non-blocking function
+
+    userInput = commandInput.toInt();
+
+    if (userInput >= 10 && userInput <= 65535) {
+      return userInput;
+    } else {
+      Serial.println("Invalid Input. Try again.");
+    }
+
   }
 }
 

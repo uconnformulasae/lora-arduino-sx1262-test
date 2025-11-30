@@ -90,16 +90,34 @@ void userInitializeSX1262() {
     Serial.println("Bandwidth (7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125.0, 250.0, or 500.0 kHz)?");
     float band = serialInputCollectBand();
 
-    Serial.println("Spreading Factor (7 through 12)?");
+    Serial.println("Spreading Factor (5 through 12)?");
     int8_t sf = serialInputCollectSF();
 
     Serial.println("Coding Rate (1 through 4)?");
     int8_t cr = serialInputCollectCR();
 
-    Serial.println("Sync Word (2 digit hex)");
+    Serial.println("Sync Word (2 digit hex)?");
     Serial.print("0x");
     int16_t sw = serialInputCollectSW();
 
+    Serial.println("Output Power (0dBm through 22dBm)?");
+    int8_t op = serialInputCollectOP();
+
+    Serial.println("Preamble Length (10 through 65535)?");
+    int32_t pl = serialInputCollectPL();
+
+    Serial.println("========== [Final Custom Options] ==========");
+    serialPrintOptions(freq, band, sf, cr, sw, op, pl);
+    Serial.println("Final Confirmation (y/n)?");
+
+    if (serialInputCollectOptionYN() != 1) {
+      while (true) {
+        Serial.println("Reset Device!");
+        delay(60000);
+      }
+    }
+
+    int radio_state = radio.begin(freq, band, sf, cr, sw, op, pl);
   }
 
   Serial.println("Initialization Complete.");
