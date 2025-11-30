@@ -83,6 +83,7 @@ void userInitializeSX1262() {
     Serial.println("Okay, Not Using Defaults");
 
     Serial.println("========== [Custom Options] ==========");
+    Serial.println("*See documentation for more information on options*");
     Serial.println("Frequency (150 MHz through 960 MHz, IMPORTANT: Ensure to set to regional legal frequency, transmission on illegal/incorrect frequencies can be a crime!!)?");
     float freq = serialInputCollectFreq();
 
@@ -94,6 +95,11 @@ void userInitializeSX1262() {
 
     Serial.println("Coding Rate (1 through 4)?");
     int8_t cr = serialInputCollectCR();
+
+    Serial.println("Sync Word (2 digit hex)");
+    Serial.print("0x");
+    int16_t sw = serialInputCollectSW();
+
   }
 
   Serial.println("Initialization Complete.");

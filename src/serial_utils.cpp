@@ -98,6 +98,23 @@ int8_t serialInputCollectCR() {
   }
 }
 
+int16_t serialInputCollectSW() {
+  String commandInput;
+  int16_t userInput = -1;
+
+  while (true) { // Blocking component of function, runs until valid input
+    do {
+      commandInput = serialInputListener();
+    } while (commandInput[0] == -1); // Wait for input from non-blocking function
+
+    const char* commandInputChar = commandInput.c_str();
+
+    userInput = (int)strtol(commandInputChar, NULL, 16);
+
+    return userInput;
+  }
+}
+
 uint8_t serialInputCollectOption(int numOptions, ...) {
   /**
    * Retrieves a user response for list of options. Returns a uint8_t of option starting with 0. No default option, must provide input matching option (caller can specify a blank "" option to handle if desired but will output as separate option). This function is blocking.
