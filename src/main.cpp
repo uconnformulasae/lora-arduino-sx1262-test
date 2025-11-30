@@ -88,6 +88,9 @@ void userInitializeSX1262() {
 
     Serial.println("Bandwidth (7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125.0, 250.0, or 500.0 kHz)?");
     float band = serialInputCollectBand();
+
+    Serial.println("Spreading Factor (7 through 12)?");
+    int8_t sf = serialInputCollectSF();
   }
 
   Serial.println("Initialization Complete.");
