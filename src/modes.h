@@ -12,6 +12,14 @@
 #include <Arduino.h>
 #include <RadioLib.h>
 
+void benchModeTx(SX1262 radio);
+
+void benchModeRx(SX1262 radio);
+
+void pingModeTx(SX1262 radio);
+
+void pingModeRx(SX1262 radio);
+
 void manualMode(SX1262 radio);
 
 void manualModeTx(SX1262 radio, String msg);

@@ -13,6 +13,42 @@
 
 volatile uint8_t rxFlag = 0;
 
+void benchModeTx(SX1262 radio) {
+
+}
+
+void benchModeRx(SX1262 radio) {
+
+}
+
+void pingModeTx(SX1262 radio) {
+  radio.transmit("ping");
+
+  String str;
+
+  radio.receive(str);
+
+  if (str == "pong") {
+    Serial.println("Success (Ping - Pong)! RSSI: " + String(radio.getRSSI(), 2) + " SNR: " + String(radio.getSNR(), 2));
+  } else {
+    Serial.println("Error!");
+  }
+}
+
+void pingModeRx(SX1262 radio) {
+  String str;
+
+  radio.receive(str);
+
+  if (str == "ping") {
+    Serial.println("Success (Ping)! RSSI: " + String(radio.getRSSI(), 2) + " SNR: " + String(radio.getSNR(), 2));
+  } else {
+    Serial.println("Error!");
+  }
+
+  radio.transmit("pong");
+}
+
 void manualMode(SX1262 radio) {
   String commandInput = serialInputListener();
 

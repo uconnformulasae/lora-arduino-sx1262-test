@@ -45,13 +45,18 @@ void setup() {
   }
 
   if (mode == 1 && RxTxMode == 1) { // Ping Tx side
-    // Ask for ping time
-    // Run pings
-    // Recive responses
+    Serial.println("Ping mode interval time (float, seconds)?");
+    unsigned int interval = (int)(serialInputCollectPingInterval()*1000.0F);
+
+    pingModeTx(radio);
+
+    delay(interval);
   }
 
   if (mode == 1 && RxTxMode == 0) { // Ping Rx side
-    // Listen for pings and respond
+    while (true) {
+      pingModeRx(radio);
+    }
   } else {
     radio.startReceive();
     radio.setPacketReceivedAction(manualModeRxInterruptAction);

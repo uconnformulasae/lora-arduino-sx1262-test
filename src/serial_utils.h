@@ -11,6 +11,8 @@
 
 #include <Arduino.h>
 
+float serialInputCollectPingInterval();
+
 float serialInputCollectFreq();
 
 float serialInputCollectBand();

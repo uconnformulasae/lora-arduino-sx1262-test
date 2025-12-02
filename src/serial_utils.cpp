@@ -59,6 +59,26 @@ float serialInputCollectBand() {
   }
 }
 
+float serialInputCollectPingInterval() {
+  String commandInput;
+  float userInput = -1.0;
+
+  while (true) { // Blocking component of function, runs until valid input
+    do {
+      commandInput = serialInputListener();
+    } while (commandInput[0] == -1); // Wait for input from non-blocking function
+
+    userInput = commandInput.toFloat();
+
+    if (userInput >= 0.1 && userInput <= 1000.1) {
+      return userInput;
+    } else {
+      Serial.println("Invalid Input. Try again.");
+    }
+
+  }
+}
+
 int8_t serialInputCollectSF() {
   String commandInput;
   int8_t userInput = -1;
@@ -68,7 +88,7 @@ int8_t serialInputCollectSF() {
       commandInput = serialInputListener();
     } while (commandInput[0] == -1); // Wait for input from non-blocking function
 
-    userInput = commandInput.toFloat();
+    userInput = commandInput.toInt();
 
     if (userInput >= 5 && userInput <= 12) {
       return userInput;
