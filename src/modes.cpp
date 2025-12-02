@@ -23,13 +23,14 @@ void benchModeRx(SX1262 radio) {
 
 void pingModeTx(SX1262 radio) {
   radio.transmit("ping");
+  long txTime = millis();
 
   String str;
 
   radio.receive(str);
 
   if (str == "pong") {
-    Serial.println("Success (Ping - Pong)! RSSI: " + String(radio.getRSSI(), 2) + " SNR: " + String(radio.getSNR(), 2));
+    Serial.println("Success (Ping - Pong)! RSSI: " + String(radio.getRSSI(), 2) + " SNR: " + String(radio.getSNR(), 2) + " Round-trip Time: " + String(millis() - txTime));
   } else {
     Serial.println("Error!");
   }
