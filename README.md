@@ -64,8 +64,10 @@ PlatformIO was used to develop this code, thus it is recommended to use it to bu
 
 ## Basic Usage
 
-1. Connect both Arduinos to separate computers. Perform the same following operations on both devices.
-2. Open up serial monitor of choice with a baud rate of 9600 connected to the board. A serial monitor is required before the device will complete initialization.
-3. Configure settings through serial monitor commands
-4. Send transmissions and recive messages.
-
+1. Connect both Arduinos to separate computers. Perform the following operations on both devices.
+2. Open up serial monitor of choice with a baud rate of 9600 connected to the board. A serial monitor is required before the device will complete initialization, the code is designed to wait for the serial monitor to start before continuing.
+3. There are three modes of operation that can be performed to test the connection. Benchmark (b) mode runs a predefined script to test a range of settings and configurations and outputs the results. Ping (p) mode constantly sends data at regular intervals to ensure a connection is not lost when moving the devices around or changing the environment. Manual (m) mode allows you to send basic ASCII text between the devices through the serial monitor.
+4. Depending on the mode, different settings will need to be configured:
+5. If the mode is Benchmark or Ping, these have a defined sender (Tx) and reciever (Rx); for Manual mode, they both can send and recieve and thus this question will not be asked.
+6. If the mode is Ping or Manual, these will require you to set the device settings over the serial monitor; because Benchmark is designed to test many settings, this question will not be asked.
+7. If the mode is Ping and the sender (Tx), an additional question is for how often the pings will be sent; the Rx side will always immediately respond to any pings it recieves.
