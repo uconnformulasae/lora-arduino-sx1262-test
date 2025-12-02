@@ -10,12 +10,9 @@
 #include <RadioLib.h>
 #include <config.h>
 #include <serial_utils.h>
+#include <modes.h>
 
 SX1262 radio = new Module(SPI_NSS, DIO1, NRST, BUSY);
-
-volatile uint8_t rxFlag = 0;
-
-void packetRecievedAction();
 
 void userInitializeSX1262();
 
@@ -55,51 +52,20 @@ void setup() {
 
   if (mode == 1 && RxTxMode == 0) { // Ping Rx side
     // Listen for pings and respond
-  }
-
-  // Manual mode will just end up at main loop below, rx and tx modes are the same
-  radio.startReceive();
-  radio.setPacketReceivedAction(packetRecievedAction);
-}
-
-void loop() { // Manual mode
-  String commandInput = serialInputListener();
-
-  if (commandInput[0] != -1) { // Input
-    int stateTX = radio.transmit(commandInput);
-
-    if (stateTX == RADIOLIB_ERR_NONE) {
-      Serial.println("Tx: " + commandInput);
-    } else {
-      Serial.print("Transmit Failed. Code: ");
-      Serial.println(stateTX);
-    }
-
+  } else {
     radio.startReceive();
-  } 
+    radio.setPacketReceivedAction(manualModeRxInterruptAction);
+    while (true) {
+      manualMode(radio);
 
-  if (rxFlag == 1) {
-    rxFlag = 0;
-
-    String rxInput;
-
-    int stateRX = radio.readData(rxInput);
-
-    if (stateRX == RADIOLIB_ERR_NONE) {
-      Serial.println("Rx: " + rxInput);
-      Serial.println("- RSSI: " + String(radio.getRSSI(), 2));
-      Serial.println("- SNR: " + String(radio.getSNR(), 2));
-    } else {
-      Serial.print("Recieve Failed. Code: ");
-      Serial.println(stateRX);
+      delay(10);
     }
   }
-
-  delay(10);
+ 
 }
 
-void packetRecievedAction() {
-  rxFlag = 1;
+void loop() {
+  // Intentionally Blank
 }
 
 void userInitializeSX1262() {
