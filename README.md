@@ -71,3 +71,23 @@ PlatformIO was used to develop this code, thus it is recommended to use it to bu
 5. If the mode is Benchmark or Ping, these have a defined sender (Tx) and reciever (Rx); for Manual mode, they both can send and recieve and thus this question will not be asked.
 6. If the mode is Ping or Manual, these will require you to set the device settings over the serial monitor; because Benchmark is designed to test many settings, this question will not be asked.
 7. If the mode is Ping and the sender (Tx), an additional question is for how often the pings will be sent; the Rx side will always immediately respond to any pings it recieves.
+
+## Modes and Applications
+
+Each mode has an intended purpose for testing the device. These are some notes about why they exist and the intentions behind them.
+
+### Benchmark Mode
+
+Benchmark Mode tests all reasonable settings for Bandwidth and Spreading Factor (potentially others but just these for now).
+
+This mode is designed for the developer to put the device in an environemnt similar to the final application and see which settings would be appropriate for the final application. This can also be used to test antennas and see their effect on the device's performance.
+
+### Ping Mode
+
+Ping Mode takes a single setting and periodically (using a defined interval) sends a packet of data from the transmitter to the reciever which will respone with another packet. If both packets go through, the transmitter can assume the reciever is reachable.
+
+This mode is designered for the developer to move the device around and change environments to see if there are any transient problems (issues which only occur part of the time). This would be intended to be run after the benchmark to determine the best configuration.
+
+### Manual Mode
+
+Manual mode is intended as a quick demo to be able to send user messages back and forth between the two devices with a predefined configuration. This mode is the most simplist mode where both devices are constantly recieving until a message is sent over serial which will be transmitted.
