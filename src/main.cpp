@@ -41,6 +41,7 @@ void setup() {
   }
 
   if (mode == 0 && RxTxMode == 0) { // Benchmark Rx side
+    // initialize
     // Listen for script and print
   }
 
