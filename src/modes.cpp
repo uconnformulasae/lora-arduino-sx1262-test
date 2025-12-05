@@ -27,24 +27,26 @@ void pingModeTx(SX1262 radio) {
 
   String str;
 
-  radio.receive(str);
+  int stateRX = radio.receive(str);
 
   if (str == "pong") {
     Serial.println("Success (Ping - Pong)! RSSI: " + String(radio.getRSSI(), 2) + " SNR: " + String(radio.getSNR(), 2) + " Round-trip Time: " + String(millis() - txTime));
   } else {
-    Serial.println("Error!");
+    Serial.print("Recieved Failed. Code: ");
+    Serial.println(stateRX);
   }
 }
 
 void pingModeRx(SX1262 radio) {
   String str;
 
-  radio.receive(str);
+  int stateRX = radio.receive(str);
 
   if (str == "ping") {
     Serial.println("Success (Ping)! RSSI: " + String(radio.getRSSI(), 2) + " SNR: " + String(radio.getSNR(), 2));
   } else {
-    Serial.println("Error!");
+    Serial.print("Recieved Failed. Code: ");
+    Serial.println(stateRX);
   }
 
   radio.transmit("pong");
