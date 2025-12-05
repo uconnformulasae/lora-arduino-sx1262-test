@@ -90,7 +90,7 @@ void userInitializeSX1262() {
   if (userSelect == 1) {
     Serial.println("Using Defaults");
 
-    radio_state = radio.begin(d_frequency, d_bandwidth, d_spreading_factor, d_coding_rate, d_sync_word, d_output_power, d_preamble_length);
+    radio_state = radio.begin(d_frequency, d_bandwidth, d_spreading_factor, d_coding_rate, d_sync_word, d_output_power, d_preamble_length, 1.7F /* Added TCXO voltage for troubleshooting, may not be nessesary*/);
   } else {
     Serial.println("Okay, Not Using Defaults");
 
@@ -128,8 +128,8 @@ void userInitializeSX1262() {
         delay(60000);
       }
     }
-
-    radio_state = radio.begin(freq, band, sf, cr, sw, op, pl);
+    
+    radio_state = radio.begin(freq, band, sf, cr, sw, op, pl, 1.7F /* Added TCXO voltage for troubleshooting, may not be nessesary*/);
   }
 
   if (radio_state == RADIOLIB_ERR_NONE) {
