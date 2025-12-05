@@ -32,8 +32,14 @@ void pingModeTx(SX1262 radio) {
   if (str == "pong") {
     Serial.println("Success (Ping - Pong)! RSSI: " + String(radio.getRSSI(), 2) + " SNR: " + String(radio.getSNR(), 2) + " Round-trip Time: " + String(millis() - txTime));
   } else {
-    Serial.print("Recieved Failed. Code: ");
-    Serial.println(stateRX);
+    if (stateRX == RADIOLIB_ERR_NONE) {
+      Serial.println("Wrong string recieved. Are you in the right mode?");
+    } else if (stateRX == RADIOLIB_ERR_RX_TIMEOUT) {
+      Serial.println("Recieve Timeout, Still Recieving.");
+    } else {
+      Serial.print("Recieved Failed. Code: ");
+      Serial.println(stateRX);
+    }
   }
 }
 
@@ -45,8 +51,14 @@ void pingModeRx(SX1262 radio) {
   if (str == "ping") {
     Serial.println("Success (Ping)! RSSI: " + String(radio.getRSSI(), 2) + " SNR: " + String(radio.getSNR(), 2));
   } else {
-    Serial.print("Recieved Failed. Code: ");
-    Serial.println(stateRX);
+    if (stateRX == RADIOLIB_ERR_NONE) {
+      Serial.println("Wrong string recieved. Are you in the right mode?");
+    } else if (stateRX == RADIOLIB_ERR_RX_TIMEOUT) {
+      Serial.println("Recieve Timeout, Still Recieving.");
+    } else {
+      Serial.print("Recieved Failed. Code: ");
+      Serial.println(stateRX);
+    }
   }
 
   radio.transmit("pong");
