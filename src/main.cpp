@@ -130,6 +130,7 @@ void userInitializeSX1262() {
     }
     
     radio_state = radio.begin(freq, band, sf, cr, sw, op, pl, 1.7F /* Added TCXO voltage for troubleshooting, may not be nessesary*/);
+    radio.setRfSwitchPins(RF_SW_PIN, -1);
   }
 
   if (radio_state == RADIOLIB_ERR_NONE) {

@@ -15,7 +15,8 @@
 #define d_preamble_length 20
 
 // Arduino Mega Pins
-#define SPI_NSS 53
+#define BUSY 6
 #define DIO1 7
 #define NRST 8
-#define BUSY 6
+#define RF_SW_PIN 9
+#define SPI_NSS 53
