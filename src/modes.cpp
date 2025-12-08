@@ -76,6 +76,7 @@ void manualMode(SX1262 radio) {
     rxFlag = 0;
 
     manualModeRx(radio);
+    radio.startReceive();
   }
 }
 
@@ -105,6 +106,6 @@ void manualModeRx(SX1262 radio) {
   }
 }
 
-void manualModeRxInterruptAction() {
+void manualModeRxInterruptAction(void) {
   rxFlag = 1;
 }
