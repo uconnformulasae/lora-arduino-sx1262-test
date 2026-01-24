@@ -91,3 +91,23 @@ This mode is designered for the developer to move the device around and change e
 ### Manual Mode
 
 Manual mode is intended as a quick demo to be able to send user messages back and forth between the two devices with a predefined configuration. This mode is the most simplist mode where both devices are constantly recieving until a message is sent over serial which will be transmitted.
+
+## Frequency Hopping Spread Spectrum (FHSS)
+
+To be able to use below 250 kHz bandwidth (to increase range) while complying with FCC rules, FHSS must be implemented with a few requirements:
+
+1. At least 50 psudorandom frequencies with usage evenly distributed across all of them.
+2. Each frequency must not be dwelled on for longer than 400ms over a 20 second period of time.
+3. Minimum channel separation of 25kHz or the 20 dB bandwidth of the hopping channel, whichever is greater.
+4. Maximum peak power output must not exceed 1 watt (+30dBm)
+5. Do Not Leave the appropriate band of 902-928 MHz, including the 20 dB footprint.
+6. The reciever must also follow the hopping frequency.
+
+To stay compliant with these rules, the following is implemented when using FHSS:
+
+1. Exactly 50 fixed, pre-determined, frequencies are used, but order is randomized on startup (based on the FHSS seed) to comply with point 1.
+2. Each packet will be sent on a separate frequency. Each packet will have a transmit time shorter than 400ms and with quiet time before and after the transmission to fit 400ms blocks to make it easier to time recieving and to ensure compliance with point 2.
+3. Channels will be chosen with appropriate separation for point 3.
+4. Peak power will not be reached by the chip (limit is +22dBm output) for point 4.
+5. Channels will be chosen to stay withint the appropriate band accounting for larger actual footprint for point 5.
+6. The reciever will actually hop along with the transmitter.
