@@ -17,7 +17,7 @@ SX1262 radio = new Module(SPI_NSS, DIO1, NRST, BUSY);
 void userInitializeSX1262();
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   while (!Serial) { // Wait for serial monitor to start before moving on
     delay(1000);
@@ -105,7 +105,7 @@ void userInitializeSX1262() {
     Serial.println("Spreading Factor (5 through 12)?");
     int8_t sf = serialInputCollectSF();
 
-    Serial.println("Coding Rate (1 through 4)?");
+    Serial.println("Coding Rate (4 through 8)?");
     int8_t cr = serialInputCollectCR();
 
     Serial.println("Sync Word (2 digit hex)?");
