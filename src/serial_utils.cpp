@@ -110,7 +110,7 @@ int8_t serialInputCollectCR() {
 
     userInput = commandInput.toInt();
 
-    if (userInput >= 1 && userInput <= 4) {
+    if (userInput >= 4 && userInput <= 7) {
       return userInput;
     } else {
       Serial.println("Invalid Input. Try again.");
