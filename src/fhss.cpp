@@ -44,6 +44,13 @@ void initializeFHSS(SX1262& radio, long seed) {
     generateIndexMap(fhss_index_map, 50);
     randomizeIndexMap(fhss_index_map, 50, seed);
     radio.setPacketReceivedAction(rxFHSSInterruptHandler);
+
+    // FIX: Manually set the initial frequency and start receiving!
+    radio.setFrequency(getFreqFHSS(0)); 
+    radio.startReceive(); 
+    
+    // FIX: Ensure the logic knows where we started so it doesn't hop immediately
+    fhss_previous_index = 0;
 }
 
 void generateIndexMap(uint8_t* map, uint8_t elements) {
