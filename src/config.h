@@ -3,20 +3,12 @@
  *  Description: Contains configuration definitions
  * 
  *  Author: Charlie K.
- *  Date: 11/26/25
+ *  Date: 2/3/2026
  */
 
-#define d_frequency 915.0
-#define d_bandwidth 500.0
-#define d_spreading_factor 7
-#define d_coding_rate 5
-#define d_sync_word 0x34
-#define d_output_power 2
-#define d_preamble_length 20
-
 // Arduino Mega Pins
-#define BUSY 6
-#define DIO1 7
+#define BUSY 5
+#define DIO1 3
 #define NRST 8
-#define RF_SW_PIN 9
+#define RF_SW_PIN 2
 #define SPI_NSS 53
