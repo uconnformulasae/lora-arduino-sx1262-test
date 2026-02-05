@@ -11,7 +11,6 @@
 #include <config.h>
 #include <utils.h>
 #include <fhss.h>
-#include <serial_utils.h>
 
 SX1262 radio = new Module(SPI_NSS, DIO1, NRST, BUSY);
 settings radsettings = {};
