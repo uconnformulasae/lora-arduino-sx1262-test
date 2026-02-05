@@ -45,12 +45,8 @@ void initializeFHSS(SX1262& radio, long seed) {
     randomizeIndexMap(fhss_index_map, 50, seed);
     radio.setPacketReceivedAction(rxFHSSInterruptHandler);
 
-    // FIX: Manually set the initial frequency and start receiving!
-    radio.setFrequency(getFreqFHSS(0)); 
-    radio.startReceive(); 
-    
-    // FIX: Ensure the logic knows where we started so it doesn't hop immediately
-    fhss_previous_index = 0;
+    // Aquire Max Packet Size
+    max_packet_size = maxBytes(radio, max_hop_time);
 }
 
 void generateIndexMap(uint8_t* map, uint8_t elements) {
@@ -92,6 +88,10 @@ int rxFHSS(SX1262& radio, String& data) {
 
     } else { // Radios are not synced, sit at freq index 0 until a packet is recieved which can be used to sync (This will cause the rx to delay by many seconds (like 20s) because of how long it takes for the tx to loop around)
         fhss_current_index = 0;
+        fhss_previous_index = 0;
+
+        radio.setFrequency(getFreqFHSS(0)); 
+        radio.startReceive(); 
     }
 
     if (fhss_current_index != fhss_previous_index) { // Detect if we need to hop, if so, change freq and go back to recieving
