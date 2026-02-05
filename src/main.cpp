@@ -13,7 +13,7 @@
 #include <fhss.h>
 
 SX1262 radio = new Module(SPI_NSS, DIO1, NRST, BUSY);
-settings radsettings = {};
+settings radsettings = {915.0, 62.5, 9, 4, 0x12, 22, 8, 12345};
 String data;
 
 
@@ -25,12 +25,9 @@ void setup() {
     }
     Serial.println("Serial Monitor Start");
 
-    Serial.print(radio.begin(915.0, 62.5, 9, 4, RADIOLIB_SX126X_SYNC_WORD_PRIVATE, 22, 8, 1.7F /* Added TCXO voltage for troubleshooting, may not be nessesary*/));
-    radio.setRfSwitchPins(RF_SW_PIN, -1);
+    userInitializeSX1262(radio, radsettings, RF_SW_PIN);
 
-    max_packet_size = maxBytes(radio, max_hop_time);
-
-    initializeFHSS(radio, 12345);
+    initializeFHSS(radio, radsettings.seed);
 }
 
 void loop() {
