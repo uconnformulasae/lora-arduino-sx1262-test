@@ -43,10 +43,10 @@ Connect the module headers to the appropriate pins listed below. Also, connect t
 | :------------- | :--------------- | :------------------------- |
 | **3v3** (8) | 3v3 | Power Supply (3.3V) |
 | **GND** (7) | GND | Ground |
-| **BUSY** (11) | D6 | Busy Signal of SX1262 |
-| **DIO1** (12) | D7 | Multipurpose DIO of SX1262 |
+| **BUSY** (11) | D5 | Busy Signal of SX1262 |
+| **DIO1** (12) | D3 | Multipurpose DIO of SX1262 |
 | **NRST** (5) | D8 | SX1262 Reset (active low) |
-| **RF\_SW** (1) | D9 | RF Switch (high is rx, low is tx) |
+| **RF\_SW** (1) | D2 | RF Switch (high is rx, low is tx) |
 | **SPI\_NSS/CS** (6) | D53 | Chip Select (SS) |
 | **SPI\_MOSI/COPI** (3) | D51 | Master Out / Slave In |
 | **SPI\_MISO/CIPO** (2) | D50 | Master In / Slave Out |
